@@ -1,101 +1,102 @@
-# AI 활용 자유 주제 파이썬 미니 프로젝트
-# 이름 또는 학번: 
-# 프로젝트 주제: 
-
-# ============================================================
-# 사용 안내
-# ------------------------------------------------------------
-# 이 파일은 예시 골격입니다.
-# 그대로 제출하지 말고, 반드시 자신의 주제에 맞게 수정하세요.
-#
-# 필수 조건
-# 1. 2차원 리스트 사용
-# 2. 함수 2개 이상, 가능하면 3개 이상 분리
-# 3. 조건문 사용
-# 4. 반복문 사용
-# 5. 실행 결과 출력
-# ============================================================
-
-
-# ------------------------------------------------------------
-# 1. 데이터 준비: 2차원 리스트
-# ------------------------------------------------------------
-# 아래 예시는 "활동 추천 프로그램"입니다.
-# 자신의 주제에 맞게 data를 만드세요.
-#
-# 현재 열의 의미:
-# 0번 열: 활동 이름
-# 1번 열: 필요한 시간(분)
-# 2번 열: 추천 기분
-# 3번 열: 활동 유형
-# ------------------------------------------------------------
-
-activities = [
-    ["산책하기", 30, "피곤", "운동"],
-    ["짧은 낮잠", 20, "피곤", "휴식"],
-    ["좋아하는 음악 듣기", 10, "우울", "휴식"],
-    ["문제집 3쪽 풀기", 40, "차분", "공부"],
-    ["방 정리하기", 25, "답답", "생활"],
-    ["친구에게 연락하기", 15, "우울", "소통"],
+# [직업명, 관련과목, 협업, 창의성, 문제해결, 데이터분석]
+jobs = [
+    # 수학 관련
+    ["AI 데이터 전문가", "수학", "Y", "N", "Y", "Y"],
+    ["소프트웨어 개발자", "수학", "Y", "Y", "Y", "N"],
+    
+    # 과학 관련
+    ["생명과학 연구원", "과학", "N", "N", "Y", "Y"],
+    ["로봇 공학자", "과학", "Y", "Y", "Y", "N"],
+    
+    # 사회 관련
+    ["마케팅 기획자", "사회", "Y", "Y", "N", "Y"],
+    ["심리 상담 전문가", "사회", "N", "N", "N", "Y"],
+    
+    # 국어 관련
+    ["초등 교사", "국어", "Y", "N", "N", "N"],
+    ["콘텐츠 작가", "국어", "N", "Y", "Y", "N"],
+    
+    # 예술(미술/음악) 관련
+    ["UX/UI 디자이너", "예술", "Y", "Y", "N", "Y"],
+    ["영상 크리에이터", "예술", "N", "Y", "Y", "N"]
 ]
-
-
-# ------------------------------------------------------------
-# 2. 함수 정의
-# ------------------------------------------------------------
-
-def show_intro():
-    """프로그램 제목과 안내를 출력한다."""
-    print("=" * 40)
-    print("AI 활용 자유 주제 파이썬 미니 프로젝트")
-    print("예시: 기분과 시간에 따른 활동 추천기")
-    print("=" * 40)
-
-
 def get_user_input():
-    """사용자에게 기분과 남은 시간을 입력받는다."""
-    mood = input("현재 기분을 입력하세요. 예: 피곤, 우울, 차분, 답답: ")
-    minutes = int(input("사용 가능한 시간을 분 단위로 입력하세요: "))
-    return mood, minutes
+    print("\n--- 미래 직업 적성 검사를 시작합니다 ---")
+    # 미술/음악 대신 직업 데이터와 비교하기 쉽게 '예술'로 통합 안내합니다.
+    subject = input("좋아하는 과목을 입력하세요 (국어/수학/사회/과학/예술): ")
 
+    # [질문 1] 협업 선호
+    while True:
+        team = input("팀으로 협업하는 활동을 좋아하시나요? (Y/N): ").upper()
+        if team in ["Y", "N"]: break
+        print("잘못된 입력입니다. Y 또는 N으로 입력해 주세요.")
 
-def find_recommendations(data, mood, minutes):
-    """2차원 리스트를 반복하며 조건에 맞는 활동을 찾는다."""
-    results = []
+    # [질문 2] 창의성 선호
+    while True:
+        creative = input("새로운 아이디어를 내는 활동을 좋아하시나요? (Y/N): ").upper()
+        if creative in ["Y", "N"]: break
+        print("잘못된 입력입니다. Y 또는 N으로 입력해 주세요.")
 
-    for row in data:
-        name = row[0]
-        required_minutes = row[1]
-        recommended_mood = row[2]
-        activity_type = row[3]
+    # [질문 3] 문제 해결 선호
+    while True:
+        problem = input("논리적인 문제를 푸는 걸 좋아하시나요? (Y/N): ").upper()
+        if problem in ["Y", "N"]: break
+        print("잘못된 입력입니다. Y 또는 N으로 입력해 주세요.")
 
-        # 조건문: 사용자의 기분과 시간이 활동 조건에 맞는지 판단한다.
-        if recommended_mood == mood and required_minutes <= minutes:
-            results.append([name, required_minutes, activity_type])
+    # [질문 4] 데이터/분석 선호
+    while True:
+        data = input("수치나 정보를 정리하고 분석하는 걸 좋아하시나요? (Y/N): ").upper()
+        if data in ["Y", "N"]: break
+        print("잘못된 입력입니다. Y 또는 N으로 입력해 주세요.")    
 
-    return results
+    # [수정 완료] 뒤의 2개 질문을 지웠으므로 딱 5개만 묶어서 반환합니다.
+    return [subject, team, creative, problem, data]
+def find_best_job(job_list, user_info):
+    best_job = ""
+    max_score = -1
+    
+    user_subject  = user_info[0] # 과목
+    user_team     = user_info[1] # 협업
+    user_creative = user_info[2] # 창의성
+    user_problem  = user_info[3] # 문제해결
+    user_data     = user_info[4] # 데이터분석
+    
+    for job in job_list:
+        score = 0  
+        
+        # 성향 일치 여부 비교 및 점수 누적
+        if job[1] == user_subject: score += 2  # 과목 일치는 가산점 2점
+        if job[2] == user_team: score += 1     
+        if job[3] == user_creative: score += 1  
+        if job[4] == user_problem: score += 1   
+        if job[5] == user_data: score += 1      
+        
+        # 최댓값 갱신 알고리즘
+        if score > max_score:
+            max_score = score
+            best_job = job[0] 
+            
+    return best_job, max_score
 
-
-def print_result(results):
-    """추천 결과를 출력한다."""
-    print("\n[추천 결과]")
-
-    if len(results) == 0:
-        print("조건에 맞는 활동이 없습니다.")
-        print("시간을 늘리거나 다른 기분을 입력해 보세요.")
-    else:
-        for item in results:
-            print(f"- {item[0]} / {item[1]}분 / 유형: {item[2]}")
-
+def print_result(best_job, max_score):
+    print("\n" + " 분석 진행 중... 📊 ".center(38, "-"))
+    print("\n" + "=[ 적성 검사 결과 ]=".center(36, " "))
+    print(f" ▶ 당신에게 가장 추천하는 미래 직업: [ {best_job} ]")
+    print(f" ▶ 매칭 적합도 점수: {max_score} / 6 점")
+    print("="*40)
 
 def main():
-    show_intro()
-    mood, minutes = get_user_input()
-    results = find_recommendations(activities, mood, minutes)
-    print_result(results)
-
-
-# ------------------------------------------------------------
-# 3. 프로그램 실행
-# ------------------------------------------------------------
-main()
+    while True:
+        # 입력 -> 처리 -> 출력 흐름 연결
+        user_info = get_user_input()
+        best_job, max_score = find_best_job(jobs, user_info)
+        print_result(best_job, max_score)
+        
+        # 프로그램 재실행 여부 확인
+        retry = input("\n검사를 다시 하시겠습니까? (Y/N): ").upper()
+        if retry != "Y":
+            print("\n프로그램을 종료합니다. 당신의 진로를 응원합니다! 🚀")
+            break
+            
+if __name__ == "__main__":
+    main()
